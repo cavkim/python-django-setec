@@ -1,0 +1,43 @@
+{% extends "backend/base.html" %}
+
+{% block title %}AdminLTE 3 | Subjects{% endblock %}
+{% block page_heading %}Subjects{% endblock %}
+{% block breadcrumb %}Subjects{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Subject List</h3>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 10px">#</th>
+          <th>Subject Name</th>
+          <th style="width: 120px">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for subject in subjects %}
+        <tr>
+          <td>{{ subject.id }}</td>
+          <td>{{ subject.subject_name }}</td>
+          <td>
+            <a href="{% url 'edit_subject' subject.id %}" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>
+            <a href="{% url 'delete_subject' subject.id %}" class="btn btn-danger btn-xs" onclick="return confirm('Delete this subject?');"><i class="fas fa-trash"></i></a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3" class="text-center text-muted">No subjects yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-right">
+    <a href="{% url 'add_subject' %}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add Subject</a>
+  </div>
+</div>
+{% endblock %}
